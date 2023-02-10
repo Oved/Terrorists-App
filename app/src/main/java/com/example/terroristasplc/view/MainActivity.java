@@ -2,6 +2,7 @@ package com.example.terroristasplc.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements iView, SearchView
         presenter = new PresenterImpl(this);
         search();
         binding.searchView.setOnQueryTextListener(this);
-
+        binding.searchView.setQueryHint("Filter");
         binding.btnReintentar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,10 +50,13 @@ public class MainActivity extends AppCompatActivity implements iView, SearchView
 
     @Override
     public void viewShowResults(List<Terrorists> terroristsList) {
+        LinearLayoutManager linear = new LinearLayoutManager(this,RecyclerView.VERTICAL, false);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, linear.getOrientation());
         binding.progress.setVisibility(View.GONE);
         adapter = new TerroristAdapter(terroristsList);
         binding.recycler.setAdapter(adapter);
-        binding.recycler.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL, false));
+        binding.recycler.addItemDecoration(dividerItemDecoration);
+        binding.recycler.setLayoutManager(linear);
     }
 
     @Override

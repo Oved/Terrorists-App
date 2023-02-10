@@ -39,8 +39,6 @@ dependencies {
 
     //Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    //Gson
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     //XML
     implementation 'com.squareup.retrofit2:converter-simplexml:2.3.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

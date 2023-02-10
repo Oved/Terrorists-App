@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.terroristasplc.R;
+import com.example.terroristasplc.databinding.CardviewTerroristsBinding;
 import com.example.terroristasplc.dataclass.Terrorists;
 
 import java.util.ArrayList;
@@ -43,18 +44,15 @@ public class TerroristAdapter extends RecyclerView.Adapter<TerroristAdapter.View
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        private TextView tv_first_name;
-        private TextView tv_last_name;
-        //private CardviewTerroristsBinding binding;
+
+        private CardviewTerroristsBinding binding;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            //binding = CardviewTerroristsBinding.inflate(itemView.layo);
-            tv_first_name = itemView.findViewById(R.id.tv_first_name);
-            tv_last_name = itemView.findViewById(R.id.tv_last_name);
+            binding = CardviewTerroristsBinding.bind(itemView);
         }
         public void onBind(int position){
-            tv_first_name.setText(terroristsList.get(position).getFirstName());
-            tv_last_name.setText(terroristsList.get(position).getLastName());
+            binding.tvFirstName.setText(terroristsList.get(position).getFirstName());
+            binding.tvLastName.setText(terroristsList.get(position).getLastName());
         }
     }
 
