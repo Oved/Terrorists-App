@@ -4,12 +4,14 @@
 
     <item android:drawable="@color/white" />
     <item
-        android:bottom="260dp"
+        android:bottom="10dp"
         android:left="10dp"
         android:right="10dp"
-        android:top="260dp">
+        android:top="10dp">
 
-        <bitmap android:src="@drawable/controlbox" />
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/controlbox" />
 
     </item>
 </layer-list>

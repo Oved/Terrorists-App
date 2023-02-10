@@ -1,6 +1,5 @@
 package com.example.terroristasplc.model;
 
-import android.util.Log;
 
 import com.example.terroristasplc.dataclass.SdnList;
 import com.example.terroristasplc.dataclass.Terrorists;

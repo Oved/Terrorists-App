@@ -30,8 +30,6 @@ public class MainActivity extends AppCompatActivity implements iView, SearchView
         setContentView(binding.getRoot());
         presenter = new PresenterImpl(this);
         search();
-        binding.searchView.setOnQueryTextListener(this);
-        binding.searchView.setQueryHint("Filter");
         binding.btnReintentar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements iView, SearchView
         binding.recycler.setAdapter(adapter);
         binding.recycler.addItemDecoration(dividerItemDecoration);
         binding.recycler.setLayoutManager(linear);
+        binding.searchView.setOnQueryTextListener(this);
     }
 
     @Override
