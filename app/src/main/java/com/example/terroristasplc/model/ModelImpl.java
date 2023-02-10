@@ -6,7 +6,6 @@ import com.example.terroristasplc.dataclass.Terrorists;
 import com.example.terroristasplc.interfaces.ApiService;
 import com.example.terroristasplc.interfaces.iModel;
 import com.example.terroristasplc.interfaces.iPresenter;
-import com.example.terroristasplc.presenter.PresenterImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +20,7 @@ import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
 public class ModelImpl implements iModel {
 
-    private final String BASE_URL = "http://www.treasury.gov";
+    private final String BASE_URL = "https://www.treasury.gov";
 
     private iPresenter presenter;
 
@@ -63,7 +62,7 @@ public class ModelImpl implements iModel {
 
             @Override
             public void onFailure(Call<SdnList> call, Throwable t) {
-                presenter.showError("No hubo conexión");
+                presenter.showError("Ha ocurrido un error");
             }
         });
     }
