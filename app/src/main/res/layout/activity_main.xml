@@ -6,33 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".view.MainActivity">
 
-    <LinearLayout
-        android:id="@+id/layout_search"
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="15dp"
         android:layout_marginTop="15dp"
-        android:orientation="horizontal"
+        android:focusable="false"
+        android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <EditText
-            android:id="@+id/etSearch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:inputType="text"
-            android:drawableStart="@drawable/ic_search"
-            android:hint="Buscar" />
-
-        <Button
-            android:id="@+id/btnSearchByFilter"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="FILTRAR" />
-
-    </LinearLayout>
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <ProgressBar
         android:id="@+id/progress"
@@ -57,7 +40,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_search" />
+        app:layout_constraintTop_toBottomOf="@+id/searchView" />
 
     <LinearLayout
         android:id="@+id/linearRetry"

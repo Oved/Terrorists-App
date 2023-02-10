@@ -1,43 +1,22 @@
 package com.example.terroristasplc.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 
-import com.example.terroristasplc.R;
 import com.example.terroristasplc.databinding.ActivityMainBinding;
-import com.example.terroristasplc.dataclass.SdnList;
 import com.example.terroristasplc.dataclass.Terrorists;
-import com.example.terroristasplc.interfaces.ApiService;
 import com.example.terroristasplc.interfaces.iPresenter;
 import com.example.terroristasplc.interfaces.iView;
 import com.example.terroristasplc.presenter.PresenterImpl;
 import com.example.terroristasplc.view.adapter.TerroristAdapter;
-import com.google.gson.JsonObject;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
-import java.util.logging.XMLFormatter;
 
-import okhttp3.OkHttpClient;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
-
-public class MainActivity extends AppCompatActivity implements iView {
+public class MainActivity extends AppCompatActivity implements iView, SearchView.OnQueryTextListener {
 
     private iPresenter presenter;
     private ActivityMainBinding binding;
@@ -50,6 +29,8 @@ public class MainActivity extends AppCompatActivity implements iView {
         setContentView(binding.getRoot());
         presenter = new PresenterImpl(this);
         search();
+        binding.searchView.setOnQueryTextListener(this);
+
         binding.btnReintentar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,12 +39,6 @@ public class MainActivity extends AppCompatActivity implements iView {
                 search();
             }
         });
-    }
-
-    public void searchByFilter(View view){
-        binding.progress.setVisibility(View.VISIBLE);
-        String search = binding.etSearch.getText().toString();
-        presenter.presenterSearch();
     }
 
     public void search(){
@@ -85,5 +60,17 @@ public class MainActivity extends AppCompatActivity implements iView {
         binding.progress.setVisibility(View.GONE);
         binding.linearRetry.setVisibility(View.VISIBLE);
         binding.txtReintentar.setText(error);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        adapter.filter(query);
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        if (newText.isEmpty()) adapter.filter("");
+        return false;
     }
 }

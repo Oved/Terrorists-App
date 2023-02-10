@@ -11,14 +11,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.terroristasplc.R;
 import com.example.terroristasplc.dataclass.Terrorists;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TerroristAdapter extends RecyclerView.Adapter<TerroristAdapter.ViewHolder> {
 
     private List<Terrorists> terroristsList;
+    private List<Terrorists> newList;
 
     public TerroristAdapter(List<Terrorists> list){
         this.terroristsList = list;
+        this.newList = new ArrayList<>();
+        newList.addAll(terroristsList);
     }
 
     @NonNull
@@ -52,5 +56,21 @@ public class TerroristAdapter extends RecyclerView.Adapter<TerroristAdapter.View
             tv_first_name.setText(terroristsList.get(position).getFirstName());
             tv_last_name.setText(terroristsList.get(position).getLastName());
         }
+    }
+
+    public void filter(String textSearch) {
+        int textLong = textSearch.length();
+        if (textLong == 0) {
+            terroristsList.clear();
+            terroristsList.addAll(newList);
+        } else {
+            terroristsList.clear();
+            for (Terrorists t : newList) {
+                if (t.getFirstName().toLowerCase().contains(textSearch.toLowerCase()) || t.getLastName().toLowerCase().contains(textSearch.toLowerCase())) {
+                    terroristsList.add(t);
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 }
